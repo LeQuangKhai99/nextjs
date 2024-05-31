@@ -21,7 +21,7 @@ const items: MenuItem[] = [
 ];
 
 const Header: React.FC = () => {
-  const [current, setCurrent] = useState('blogs');
+  const [current, setCurrent] = useState('users');
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
