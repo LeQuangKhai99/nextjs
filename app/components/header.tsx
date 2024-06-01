@@ -9,6 +9,11 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
   {
+    label: <Link href={"/"}>Home Page</Link>,
+    key: 'home',
+    icon: <MailOutlined />,
+  },
+  {
     label: <Link href={"/users"}>Manage Users</Link>,
     key: 'users',
     icon: <MailOutlined />,

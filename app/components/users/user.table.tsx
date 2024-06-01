@@ -4,6 +4,7 @@ import { IUser } from "@/app/types/backend";
 import { Table } from "antd";
 import { ColumnType } from "antd/es/table";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface IProps {
   users: IUser[] | [],
@@ -17,6 +18,7 @@ const UserTable = (props: IProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const {replace} = useRouter();
+  const [isFetching, setIsFetching] = useState(false);
   const columns: ColumnType<IUser>[] = [
     {
       title: 'ID',
@@ -35,16 +37,22 @@ const UserTable = (props: IProps) => {
     },
   ];
 
+  useEffect(() => {
+    if(users) setIsFetching(false);
+  }, [users]);
+
   const onChange = (pagination: any, filters: any, sorter: any, extra: any) => {
     if(pagination && pagination.current) {
       const params = new URLSearchParams(searchParams);
       params.set('page', pagination.current);
       replace(`${pathname}?${params.toString()}`);
+      setIsFetching(true);
     }
   }
   return (
     <div>
       <Table
+        loading={isFetching}
         bordered
         dataSource={users}
         columns={columns}

@@ -11,7 +11,6 @@ const UsersPage = async (props: any) => {
   let data = await res.json();
   const total = data.total;
   data = data.data;
-  
 
   return (
     <div>
